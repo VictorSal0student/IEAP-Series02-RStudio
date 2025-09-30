@@ -33,4 +33,16 @@ In your notebook, make a clear description of the experiment, the variables and 
 | EENU | Elbow Extension Non Use | % | 0-100 |
 
 
+## Corelation analysis
+Below are some questions to guide your analysis.
+
+- Is PANU correlated with SANU and/or EENU?
+
+```{r correlation-sanu}
+cor.test(nonuse$PANU, nonuse$EENU, method = "spearman")
+```
+```{r correlation-eenu}
+cor.test(nonuse$PANU, nonuse$SANU, method = "spearman")
+```
+
 
