@@ -10,3 +10,17 @@ output:
     number_sections: true
 ---
 
+# Load data
+
+```{r load-data}
+nonuse <- read.csv("data/test_data/NonUse.csv", sep = ",", header = TRUE)
+head(nonuse)
+summary(nonuse)
+```
+
+This file contains measures of upper extremity non-use in stroke patients. The variables are:
+
+    PANU: Proximal Arm Non Use
+    SANU: Shoulder Antepulsion Non Use
+    EENU: Elbow Extension Non Use
+    
