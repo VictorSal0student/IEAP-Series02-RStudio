@@ -96,3 +96,24 @@ ggplot(nonuse, aes(x = EENU, y = PANU)) +
        y = "PANU (%)") +
   theme_minimal()
 ```
+
+- Give the regression equations: PANU = a * SANU + b and PANU = a * EENU + b
+```{r}
+lm_sanu <- lm(SANU ~ PANU, data = nonuse)
+summary(lm_sanu)
+coef(lm_sanu)
+slope_sanu <- coef(lm_sanu)[2]
+intercept_sanu <- coef(lm_sanu)[1]
+cat("Regression equation: SANU =", slope_sanu, "* PANU +", intercept_sanu, "\n")
+```
+```{r}
+lm_eenu <- lm(EENU ~ PANU, data = nonuse)
+summary(lm_eenu)
+coef(lm_eenu)
+slope_eenu <- coef(lm_eenu)[2]
+intercept_eenu <- coef(lm_eenu)[1]
+cat("Regression equation: EENU =", slope_eenu, "* PANU +", intercept_eenu, "\n")
+```
+
+
+
