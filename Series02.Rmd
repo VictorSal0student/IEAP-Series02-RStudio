@@ -71,3 +71,28 @@ ggplot(nonuse, aes(x = EENU, y = PANU)) +
   theme_minimal()
 ```
 
+
+- Perform a linear regression for PANU-SANU (and for PANU-EENU)
+
+We do not want to predict a linear relationship between PANU and SANU & EENU, but we do it because it is asked in the exercise...
+
+```{r plot-sanu_2, message=FALSE, warning=FALSE}
+library(ggplot2)
+ggplot(nonuse, aes(x = SANU, y = PANU)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, color = "red") +
+  labs(title = "Scatter plot of PANU vs SANU",
+       x = "SANU (%)",
+       y = "PANU (%)") +
+  theme_minimal()
+```
+```{r plot-eenu_2, message=FALSE, warning=FALSE}
+library(ggplot2)
+ggplot(nonuse, aes(x = EENU, y = PANU)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, color = "red") +
+  labs(title = "Scatter plot of PANU vs EENU",
+       x = "EENU (%)",
+       y = "PANU (%)") +
+  theme_minimal()
+```
