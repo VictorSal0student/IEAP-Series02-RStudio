@@ -45,4 +45,29 @@ cor.test(nonuse$PANU, nonuse$EENU, method = "spearman")
 cor.test(nonuse$PANU, nonuse$SANU, method = "spearman")
 ```
 
+- Visualize the PANU-SANU relationship (and the PANU-EENU relationship)
+
+```{r plot-sanu, message=FALSE, warning=FALSE}
+library(ggplot2)
+ggplot(nonuse, aes(x = SANU, y = PANU)) +
+  geom_point() +
+  xlim(-100, 100) +
+  ylim(-100, 100) +
+  labs(title = "Scatter plot of PANU vs SANU",
+       x = "SANU (%)",
+       y = "PANU (%)") +
+  theme_minimal()
+```
+
+```{r plot-eenu, message=FALSE, warning=FALSE}
+library(ggplot2)
+ggplot(nonuse, aes(x = EENU, y = PANU)) +
+  geom_point() +
+  xlim(-100, 100) +
+  ylim(-100, 100) +
+  labs(title = "Scatter plot of PANU vs EENU",
+       x = "EENU (%)",
+       y = "PANU (%)") +
+  theme_minimal()
+```
 
