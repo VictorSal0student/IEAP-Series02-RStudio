@@ -129,6 +129,7 @@ End of part 1.
 
 -------------------------------------------------------------------------------
 ## Statistical tests
+In this series of exercises, you will explore how to compare two groups of data, using non-parametric tests or parametric tests.
 
 # 2.1 Make clear what is a statistical test, and when to use it.
 
@@ -278,3 +279,36 @@ Interpretation: The paired line plot clearly shows that nearly all subjects impr
 
 - Q: Write sentence in your thesis to explain your result
 A: A paired t-test revealed a significant increase in performance scores following rehabilitation training (mean difference = 2.5, 95% CI [1.2, 3.8], p = 0.001), indicating that the treatment had a positive effect on patient performance.
+
+---
+# 2.3 Testing some stereotypes
+Humans have stereotypes, some of them are probably true, some others are probably false.
+
+# 2.3.1 The data
+Download the file "snore.txt"
+
+This file contains anthropometric and qualitative measurements (1 person per line).
+- Load the data
+```{r load-snore}
+snore <- read.table("data/test_data/snore.txt", sep = "\t", header = TRUE)
+head(snore)
+summary(snore)
+```
+
+The variables are:
+- Gender: Male or Female
+- Height: in cm
+- Weight: in kg
+- Snore: Yes or No
+- Age: in years
+
+Make a table, with one row per variable, and the following columns:
+
+| Variable | Description | Unit | Possible values |
+|:--|:----|---|-----|
+| Gender | Biological sex | N/A | Categorical: "Male", "Female" |
+| Height | Height of the individual | cm | Positive numeric values |
+| Weight | Weight of the individual | kg | Positive numeric values |
+| Snore | Whether the individual snores | N/A | Categorical: "Yes", "No" |
+| Age | Age of the individual | years | Positive numeric values |
+
