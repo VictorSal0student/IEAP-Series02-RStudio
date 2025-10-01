@@ -416,3 +416,13 @@ ggpairs(snore_numeric[,c("age","weight","height","alcohol","sex","snore","smoke"
 A: The analysis reveals moderate correlations among several variables. Weight is positively associated with snoring, while males tend to have higher weight and smoking prevalence. Alcohol consumption also correlates with smoking, highlighting interconnected lifestyle factors, whereas height shows little influence.
 
 
+------------------------------------------------------------------------------
+## 3. Epilogue: beyond the scope of this series
+Finally, some of you may want to go beyond the scope of this series with new questions, such as:
+- Can you predict the value of one variable from the others? (linear regression, logistic regression, etc.)
+A: Yes, logistic regression can be used to predict the likelihood of snoring based on variables such as weight, age, sex, smoking status, and alcohol consumption. This model can help identify key predictors of snoring.
+
+- Can you classify individuals based on their variables? (clustering, PCA, etc.)
+A: Yes, clustering techniques like k-means or hierarchical clustering can be applied to group individuals based on similarities in their anthropometric and lifestyle variables. Principal Component Analysis (PCA) can also be used to reduce dimensionality and identify patterns in the data.
+
+Copilot, ClaudeAI (Sonnet 4.5) and ChatGPT were used to generate parts of the code and text in this notebook.
