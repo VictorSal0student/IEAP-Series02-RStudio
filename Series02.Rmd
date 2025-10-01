@@ -114,6 +114,14 @@ slope_eenu <- coef(lm_eenu)[2]
 intercept_eenu <- coef(lm_eenu)[1]
 cat("Regression equation: EENU =", slope_eenu, "* PANU +", intercept_eenu, "\n")
 ```
+- Summarize your results as you would do in your master’s thesis report, or as in a scientific article (e.g., What sentence will you write in the article explaining your result?)
+
+Spearman correlations revealed a strong positive association between proximal arm non-use (PANU) and elbow non-use (EENU), whereas the association between PANU and shoulder non-use (SANU) was weak and not significant; linear regression confirmed EENU as the only significant predictor of PANU.
 
 
+- What are the limits of your analysis?
 
+The analysis was constrained by substantial missing data in SANU and EENU, which reduced effective sample size and may have biased the results. The repeated-measures structure (eight observations per patient) was not fully accounted for in the correlation and simple regression models, potentially inflating significance levels. Moreover, Spearman’s rho captures monotonic but not strictly linear associations, limiting comparability with linear regression coefficients. Finally, the number of patients was not very large and there were some extreme values restricting the generalisability of the findings.
+
+
+End of part 1.
