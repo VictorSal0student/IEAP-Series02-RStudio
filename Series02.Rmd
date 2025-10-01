@@ -206,3 +206,18 @@ prepost <- read.csv("data/test_data/PrePost.csv", sep = ",", header = TRUE)
 head(prepost)
 summary(prepost)
 ```
+This file contains before/after measurements. The treatment is a rehabilitation training for individuals with cardiac conditions.
+
+The variables are:
+- ID: subject identifier
+- Time: time of measurement (Pre or Post)
+- Score: performance score (higher is better)
+- Group: group (Control or Treated)
+
+Make a table, with one row per variable, and the following columns:
+
+| Variable | Description | Unit | Possible values | Expected change |
+|:--|:----|---|-----|----|
+| Time | Time of measurement | N/A | Categorical: "Pre", "Post" | N/A |
+| Score | Performance measure | Not specified | Positive numeric values | Increase after treatment |
+
