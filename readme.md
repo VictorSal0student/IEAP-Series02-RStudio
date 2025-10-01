@@ -18,4 +18,4 @@ The assignment analyzes rehabilitation training data (before/after treatment) to
 Clone this repository or download it as a ZIP file, then open the R Markdown file in RStudio:
 
 ```bash
-git clone https://github.com/VictorSal0student/Series02-RStudio.git
+git clone https://github.com/VictorSal0student/IEAP-Series02-RStudio.git
