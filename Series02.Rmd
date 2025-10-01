@@ -125,3 +125,71 @@ The analysis was constrained by substantial missing data in SANU and EENU, which
 
 
 End of part 1.
+
+
+-------------------
+## Statistical tests
+
+2.1 Make clear what is a statistical test, and when to use it.
+
+- What is a median? A mean?
+The median is the middle value in a dataset when ordered from smallest to largest; it divides the data into two equal halves.
+[Reference: Weiss, N. A. (2017). Introductory Statistics (10th ed.). Pearson]
+
+The mean (or average) is the sum of all values divided by the number of observations; it represents the central tendency of a dataset.
+[Reference: Moore, D. S., Notz, W. I., & Fligner, M. A. (2018). The Basic Practice of Statistics (8th ed.). W.H. Freeman]
+
+- What is a variance? A standard deviation?
+Variance measures the average squared deviation of each data point from the mean, indicating how spread out the values are in a dataset.
+[Reference: De Veaux, R. D., Velleman, P. F., & Bock, D. E. (2016). Stats: Data and Models (4th ed.). Pearson]
+
+- What is a normal distribution?
+A normal distribution is a symmetric, bell-shaped probability distribution characterized by its mean and standard deviation, where most values cluster around the mean and probabilities taper off equally in both directions.
+[Reference: Freedman, D., Pisani, R., & Purves, R. (2007). Statistics (4th ed.). W.W. Norton & Company]
+
+- What is a statistical test?
+A statistical test is a method used to make inferences or decisions about a population based on sample data, by evaluating hypotheses and determining the likelihood that observed differences or relationships occurred by chance.
+[Reference: Agresti, A., & Finlay, B. (2009). Statistical Methods for the Social Sciences (4th ed.). Pearson]
+
+- When to use a statistical test?
+Statistical tests are used when you want to compare groups, assess relationships between variables, or test hypotheses about population parameters based on sample data. They are appropriate when you have collected data and need to determine if observed patterns are statistically significant or likely due to random variation.
+[Reference: Field, A. (2013). Discovering Statistics Using IBM SPSS Statistics (4th ed.). SAGE Publications]
+
+- What is a parametric test? A non-parametric test?
+Parametric tests are statistical tests that assume the data follows a specific distribution, typically a normal distribution, and rely on parameters such as the mean and standard deviation. Examples include t-tests and ANOVA.
+[Reference: Zar, J. H. (2010). Biostatistical Analysis (5th ed.). Pearson]
+
+Non-parametric tests do not assume a specific distribution and are used when data do not meet the assumptions required for parametric tests. They often rely on ranks or medians rather than means. Examples include the Mann-Whitney U test and the Kruskal-Wallis test.
+[Reference: Conover, W. J. (1999). Practical Nonparametric Statistics (3rd ed.). Wiley]
+
+- What are the assumptions of parametric tests?
+Parametric tests typically assume:
+1. The data are normally distributed.
+2. Homogeneity of variance (equal variances across groups).
+3. Independence of observations.
+4. The data are measured at an interval or ratio scale.
+[Reference: Field, A. (2013). Discovering Statistics Using IBM SPSS Statistics (4th ed.). SAGE Publications]
+
+- What are the assumptions of non-parametric tests?
+Non-parametric tests generally have fewer assumptions, but common ones include:
+1. Independence of observations.
+2. The data can be ordinal or continuous, but do not need to be normally distributed.
+3. The samples are randomly drawn from the population.
+[Reference: Conover, W. J. (1999). Practical Nonparametric Statistics (3rd ed.). Wiley]
+
+- What is a p-value?
+A p-value is the probability of obtaining test results at least as extreme as the observed results, assuming that the null hypothesis is true. It quantifies the evidence against the null hypothesis; a smaller p-value indicates stronger evidence to reject the null hypothesis.
+[Reference: Agresti, A., & Finlay, B. (2009). Statistical Methods for the Social Sciences (4th ed.). Pearson]
+
+- What is the risk of error when using a statistical test?
+The risk of error when using a statistical test primarily refers to Type I and Type II errors. A Type I error occurs when the null hypothesis is incorrectly rejected (false positive), while a Type II error occurs when the null hypothesis is incorrectly accepted (false negative). The significance level (alpha) set for the test determines the acceptable risk of a Type I error, commonly set at 0.05.
+[Reference: Field, A. (2013). Discovering Statistics Using IBM SPSS Statistics (4th ed.). SAGE Publications]
+
+- What is the difference between a paired and an unpaired test?
+A paired test is used when the same subjects are measured under two different conditions or at two different times, allowing for direct comparison of the paired observations. An example is the paired t-test.
+[Reference: Zar, J. H. (2010). Biostatistical Analysis (5th ed.). Pearson]
+
+The questions were answered using Co-Pilot and ClaudeAI (Sonnet 4.5)
+
+
+
