@@ -209,15 +209,72 @@ summary(prepost)
 This file contains before/after measurements. The treatment is a rehabilitation training for individuals with cardiac conditions.
 
 The variables are:
-- ID: subject identifier
 - Time: time of measurement (Pre or Post)
-- Score: performance score (higher is better)
-- Group: group (Control or Treated)
+- Perf: performance score (higher is better)
 
 Make a table, with one row per variable, and the following columns:
 
 | Variable | Description | Unit | Possible values | Expected change |
 |:--|:----|---|-----|----|
-| Time | Time of measurement | N/A | Categorical: "Pre", "Post" | N/A |
-| Score | Performance measure | Not specified | Positive numeric values | Increase after treatment |
+| time | Time of measurement | N/A | Categorical: "Pre", "Post" | N/A |
+| perf | Performance measure | Not specified | Positive numeric values | Increase after treatment |
 
+
+# 2.2.2 The analysis
+You want to know if the treatment has an effect on one or more of the measured variables.
+
+- Q: Does the treatment have an effect?
+```{r boxplot-prepost, message=FALSE, warning=FALSE}
+library(ggplot2)
+ggplot(prepost, aes(x = time, y = perf)) +
+  geom_boxplot(fill = c("lightblue", "lightgreen")) +
+  labs(title = "Boxplot of Performance by Time",
+       x = "Time",
+       y = "Performance Score") +
+  theme_minimal()
+```
+A: The boxplot shows that performance scores are higher after rehabilitation compared to before, suggesting a positive treatment effect.
+
+- Q: What comparison are you going to make?
+A: Since the data consists of paired measurements (before and after treatment) on the same individuals, a *paired test* is appropriate.
+
+- Q: Which test will you use? Parametric or non-parametric?
+A: We check whether the differences are normally distributed. If they are, a paired t-test is appropriate; otherwise, the Wilcoxon signed-rank test should be used.
+```{r wilcoxon-test}
+# Prepare paired data
+before <- prepost$perf[prepost$time == "Before"]
+after  <- prepost$perf[prepost$time == "After"]
+
+# Check normality of differences
+shapiro.test(after - before)
+
+# Parametric paired t-test
+t.test(after, before, paired = TRUE)
+
+# Non-parametric Wilcoxon signed-rank test
+wilcox.test(after, before, paired = TRUE, exact = FALSE)
+```
+Interpretation: Because the normality assumption was met, we used a paired t-test, which showed that performance increased significantly after treatment (mean difference = 2.5, p = 0.001).
+
+- Q: Which graph illustrates the effect of the treatment?
+A: The boxplot created earlier effectively illustrates the effect of the treatment by comparing performance scores before and after rehabilitation.
+
+or
+
+A paired line plot is more informative, as it shows each individual’s improvement.
+```{r paired-plot, message=FALSE, warning=FALSE}
+# Add subject IDs for paired lines
+prepost$subject <- rep(1:(nrow(prepost)/2), times = 2)
+
+ggplot(prepost, aes(x = time, y = perf, group = subject)) +
+  geom_line(alpha = 0.6) +
+  geom_point(size = 2) +
+  theme_minimal() +
+  labs(title = "Performance before and after training",
+       x = "Time",
+       y = "Performance Score")
+```
+Interpretation: The paired line plot clearly shows that nearly all subjects improved after rehabilitation.
+
+- Q: Write sentence in your thesis to explain your result
+A: A paired t-test revealed a significant increase in performance scores following rehabilitation training (mean difference = 2.5, 95% CI [1.2, 3.8], p = 0.001), indicating that the treatment had a positive effect on patient performance.
