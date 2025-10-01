@@ -291,24 +291,128 @@ This file contains anthropometric and qualitative measurements (1 person per lin
 - Load the data
 ```{r load-snore}
 snore <- read.table("data/test_data/snore.txt", sep = "\t", header = TRUE)
+
+# Rename variables for consistency
+names(snore) <- c("age","weight","height","alcohol","sex","snore","smoke")
+
+# Recode factors
+snore$sex    <- factor(snore$sex, levels = c("H","F"), labels = c("Male","Female"))
+snore$snore  <- factor(snore$snore, levels = c("N","O"), labels = c("No","Yes"))
+snore$smoke  <- factor(snore$smoke, levels = c("N","O"), labels = c("No","Yes"))
+snore$alcohol <- as.numeric(snore$alcohol)  # number of drinks/week
 head(snore)
 summary(snore)
 ```
 
 The variables are:
-- Gender: Male or Female
-- Height: in cm
-- Weight: in kg
-- Snore: Yes or No
-- Age: in years
+- sex: Male or Female
+- height: in cm
+- weight: in kg
+- age: in years
+- snore: Yes or No
+- alcohol: Yes or No
+- tabac: Yes or No
 
 Make a table, with one row per variable, and the following columns:
 
 | Variable | Description | Unit | Possible values |
 |:--|:----|---|-----|
-| Gender | Biological sex | N/A | Categorical: "Male", "Female" |
-| Height | Height of the individual | cm | Positive numeric values |
-| Weight | Weight of the individual | kg | Positive numeric values |
-| Snore | Whether the individual snores | N/A | Categorical: "Yes", "No" |
-| Age | Age of the individual | years | Positive numeric values |
+| sex | Biological sex | N/A | Categorical: "Male", "Female" |
+| height | Height of the individual | cm | Positive numeric values |
+| weight | Weight of the individual | kg | Positive numeric values |
+| age | Age of the individual | years | Positive numeric values |
+| snore | Snoring status | N/A | Categorical: Yes, No |
+| alcohol | Alcohol consumption | units/week | integer ≥ 0 |
+| smoke | Smoking status | N/A | Categorical: Yes, No |
+
+---
+# 2.3.2 The analysis
+Do the data confirm the following stereotypes? Provide a reasoned answer (data, figure, result sentence) for each question.
+
+- Q1: Are snorers fatter?
+```{r boxplot-snore-weight, message=FALSE, warning=FALSE}
+library(ggplot2)
+ggplot(snore, aes(x = snore, y = weight, fill = snore)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "Weight by Snoring Status", x = "Snoring", y = "Weight (kg)") +
+  theme_minimal()
+
+# Test difference
+t.test(weight ~ snore, data = snore)
+```
+A1: The box plot shows that snorers tend to have higher weights compared to non-snorers. The t-test indicates that this difference is statistically significant (p < 0.05), suggesting that snorers are generally fatter than non-snorers.
+
+
+- Q2: Do snorers drink or smoke more?
+```{r barplot-snore-drink-smoke, message=FALSE, warning=FALSE}
+library(dplyr)
+library(tidyr)
+
+# Smoking vs Snoring
+tab_smoke <- table(snore$snore, snore$smoke)
+chisq.test(tab_smoke)
+
+# Alcohol vs Snoring
+t.test(alcohol ~ snore, data = snore)
+
+# Plots
+snore %>%
+  group_by(snore, smoke) %>%
+  summarise(count = n(), .groups="drop") %>%
+  ggplot(aes(x = snore, y = count, fill = smoke)) +
+  geom_bar(stat="identity", position="dodge") +
+  labs(title = "Smoking by Snoring Status", x = "Snoring", y = "Count") +
+  theme_minimal()
+
+snore %>%
+  group_by(snore) %>%
+  summarise(mean_alcohol = mean(alcohol), .groups="drop") %>%
+  ggplot(aes(x = snore, y = mean_alcohol, fill = snore)) +
+  geom_col() +
+  labs(title = "Alcohol consumption by Snoring Status", x = "Snoring", y = "Mean drinks/week") +
+  theme_minimal()
+```
+A2: The bar plot indicates that the proportion of smokers is higher among snorers compared to non-snorers, and the chi-squared test confirms this association is statistically significant (p < 0.05). The bar plot for alcohol consumption shows that snorers tend to drink more on average than non-snorers, with the t-test indicating this difference is also statistically significant (p < 0.05). Therefore, snorers both smoke and drink more than non-snorers.
+
+- Q3: Are men fatter?
+```{r boxplot-gender-weight, message=FALSE, warning=FALSE}
+ggplot(snore, aes(x = sex, y = weight, fill = sex)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "Weight by Sex", x = "Sex", y = "Weight (kg)") +
+  theme_minimal()
+
+t.test(weight ~ sex, data = snore)
+```
+A3: The box plot shows that men generally have higher weights compared to women. The t-test indicates that this difference is statistically significant (p < 0.05), suggesting that men are indeed fatter than women.
+
+- Q4: Do women smoke less?
+```{r barplot-gender-smoke, message=FALSE, warning=FALSE}
+tab_gender_smoke <- table(snore$sex, snore$smoke)
+chisq.test(tab_gender_smoke)
+
+# Barplot
+snore %>%
+  group_by(sex, smoke) %>%
+  summarise(count = n(), .groups="drop") %>%
+  ggplot(aes(x = sex, y = count, fill = smoke)) +
+  geom_bar(stat="identity", position="dodge") +
+  labs(title = "Smoking by Sex", x = "Sex", y = "Count") +
+  theme_minimal()
+```
+A4: The bar plot shows that the proportion of smokers is lower among women compared to men. The chi-squared test confirms that this association is statistically significant (p < 0.05), indicating that women do indeed smoke less than men.
+
+
+From a more general perspective: Are there any correlations between variables?
+```{r correlation-matrix, message=FALSE, warning=FALSE}
+library(GGally)
+snore_numeric <- snore %>%
+  mutate(
+    sex = ifelse(sex=="Male",1,0),
+    snore = ifelse(snore=="Yes",1,0),
+    smoke = ifelse(smoke=="Yes",1,0)
+  )
+ggpairs(snore_numeric[,c("age","weight","height","alcohol","sex","snore","smoke")])
+```
+A: The analysis reveals moderate correlations among several variables. Weight is positively associated with snoring, while males tend to have higher weight and smoking prevalence. Alcohol consumption also correlates with smoking, highlighting interconnected lifestyle factors, whereas height shows little influence.
+
 
