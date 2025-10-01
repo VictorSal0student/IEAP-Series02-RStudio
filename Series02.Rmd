@@ -127,10 +127,10 @@ The analysis was constrained by substantial missing data in SANU and EENU, which
 End of part 1.
 
 
--------------------
+-------------------------------------------------------------------------------
 ## Statistical tests
 
-2.1 Make clear what is a statistical test, and when to use it.
+# 2.1 Make clear what is a statistical test, and when to use it.
 
 - What is a median? A mean?
 The median is the middle value in a dataset when ordered from smallest to largest; it divides the data into two equal halves.
@@ -191,5 +191,18 @@ A paired test is used when the same subjects are measured under two different co
 
 The questions were answered using Co-Pilot and ClaudeAI (Sonnet 4.5)
 
+---
+# 2.2 Effect of treatment over time
+This is a very classical question in clinical or sport research: does a treatment-training have an effect over time?
 
+To answer this question scientifically, measurements must be taken before and after treatment, and possibly later, in order to assess whether the effect is lasting or not.
 
+# 2.2.1 The data
+Download the file PrePost.csv
+
+- Load the data
+```{r load-prepost}
+prepost <- read.csv("data/test_data/PrePost.csv", sep = ",", header = TRUE)
+head(prepost)
+summary(prepost)
+```
